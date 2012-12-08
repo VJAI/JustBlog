@@ -1,0 +1,53 @@
+I've done *little more* research on the subject also I can't live with the *stupid old answer* I gave.
+
+Let me answer your second question first.
+
+**What are the advantages of including it?**
+
+Browser caches the responses returned by the server. The caching is controller by mainly three headers: `Cache-Control`, `Last-Modified` and `Expires` (not exactly limited to these three and there are others like `ETag` comes into play as well). 
+
+The `Last-Modified` header tells the browser when does the *resource* has been modified at last. The *resource* could be either *static file* or *dynamically created view*. Whenever the browser makes the request for that resource it checks with the server *"Hey, I already have a response for the resource and it's `Last-Modified` date is so and so.. see the user is already tired... if you return a 304 I'm glad to use the response from my cache else please send your new response quick"*. Note that the browser passes the `Last-Modified` value returned previously by the server in a new header called `If-Modified-Since`.
+
+Ideally the server should read the value from the `If-Modified-Since` header and has to check with the current modified date and if they are same then it should return 304 (NOT MODIFIED) or it should return the new copy of the resource again passing the current modified date in the `Last-Modified` header.
+
+The advantage is ***browser caching!***. By leveraging the browser caching the server can avoid creating a duplicate response and also it can return a new response if the cached response in the browser looks like old. The ultimate goal is ***save the time***.
+
+<hr />
+
+**How and where can I include it in MVC?**
+
+In the case of static resources like images, html files and others you don't need to worry about setting the `Last-Modified` header and checking the `If-Mofidied-Since` header because the **IIS takes care of that job**. IIS uses the file's last modified date as the `Last-Modified` header value (Note that it converts the local time to GMT).
+
+In the dynamic resources like a html content returned through an MVC action, how you can determine the `Last-Modified` header date? The dynamic driven resources are mostly data driven and it's our responsibility to decide whether the response returned previously is stale or not. Let's say you have a blog and you have a page whether you display the details of an article (not any other details) then the page's version is decided by the last modified date or created date (if the article is not modified yet) of the article. So you have to do the same work answered by **@jgauffin** in the corresponding action that delivers the view. 
+
+You have asked in the comment do I need to do this same plumbing work in all the required actions? 
+
+If you could able to abstract away the logic of reading the last modified date from database from the actions then you could accomplish the job through an action filter. The question is **how you are going to abstract the details the away from the actions?** Like passing the table/column names to the attribute? You have to figure it out!
+
+Ex.
+
+    [LastModifiedCacheFilter(Table = "tblArticles", Column = "last_modified")]
+    public ViewResult Post(int postId)
+    {
+       var post = ... get the post from database using the postId
+       return View(post);
+    }
+
+(I thought of extending the `OutputCache` filter but it's buggy! alteast still version 3.)
+
+The pseudo code of the `LastModifiedCacheFilterAttribute` implementation will be something like this..
+
+
+
+
+Do you really need to implement the *last-modified mechanism* in all your actions? 
+
+You could implement the *last-modified mechanism* to the actions that takes more time to create such a response and it takes more time to travel the response down the wire and reach the browser. In other cases I feel it just an overhead implementing throughout all the actions and also you have to *measure out the benefits* before doing so. The other main point is, in many cases the version of the page is *not just decided by a single table column* but it could be by many other things and in those cases it may be more complicated to implement this!
+
+*A point about `ETag`..*
+
+Though the question is about `Last-Modified` header I should tell something about `ETag` before clicking the *Post Your Answer* button. Compared to `Last-Modified` (which relies on datetime) header `ETag` header (relies on a hash value) is more accurate in determining whether the cached response in the browser is fresh or not but it could be little complicated to implement. IIS also includes `ETag` header along with the `Last-Modified` header for static resources. Before implementing any of this mechanism google out and see whether there is any library out there that helps you out!
+
+
+
+
