@@ -30,7 +30,7 @@ namespace JustBlog.Core.Objects
     public virtual DateTime PostedOn
     { get; set; }
 
-    public virtual DateTime Modified
+    public virtual DateTime? Modified
     { get; set; }
 
     public virtual Category Category
