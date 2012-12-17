@@ -163,9 +163,6 @@
     <Content Include="Views\Shared\_Tags.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\JustBlog.Core\JustBlog.Core.csproj">
       <Project>{787a6593-db4c-4d2a-9ae7-9848bdc7d2fd}</Project>
       <Name>JustBlog.Core</Name>

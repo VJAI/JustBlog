@@ -40,3 +40,12 @@ C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Ni
 C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\obj\Debug\JustBlog.Core.csprojResolveAssemblyReference.cache
 C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\obj\Debug\JustBlog.Core.dll
 C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\obj\Debug\JustBlog.Core.pdb
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\FluentNHibernate.dll
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Iesi.Collections.dll
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\NHibernate.dll
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Castle.Core.dll
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\NHibernate.ByteCode.Castle.dll
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Castle.Core.xml
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\FluentNHibernate.pdb
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Iesi.Collections.pdb
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\NHibernate.ByteCode.Castle.xml
