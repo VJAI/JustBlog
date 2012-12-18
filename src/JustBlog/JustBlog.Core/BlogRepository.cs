@@ -103,7 +103,7 @@ namespace JustBlog.Core
 
     public IList<Tag> Tags()
     {
-      return _session.Query<Tag>().ToList();
+      return _session.Query<Tag>().OrderBy(p => p.Name).ToList();
     }
 
     public Tag Tag(string slug)
@@ -113,7 +113,7 @@ namespace JustBlog.Core
   
     public IList<Category> Categories()
     {
-      return _session.Query<Category>().ToList();
+      return _session.Query<Category>().OrderBy(p => p.Name).ToList();
     }
 
     public Category Category(string slug)
