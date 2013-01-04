@@ -124,5 +124,6 @@ C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\bin\System.Web.We
 C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\obj\Debug\JustBlog.csprojResolveAssemblyReference.cache
 C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\obj\Debug\JustBlog.dll
 C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\obj\Debug\JustBlog.pdb
-C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\bin\FluentNHibernate.pdb
-C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\bin\Iesi.Collections.pdb
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\bin\FluentNHibernate.xml
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\bin\NHibernate.xml
+C:\Users\Vijay\Documents\GitHub\JustBlog\src\JustBlog\JustBlog\bin\Iesi.Collections.xml

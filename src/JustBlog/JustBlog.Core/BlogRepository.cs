@@ -20,50 +20,58 @@ namespace JustBlog.Core
 
     public IList<Post> Posts(int pageNo, int pageSize)
     {
-      return _session.Query<Post>()
-                     .Where(p => p.Published)
-                     .OrderByDescending(p => p.PostedOn)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category)
-                     .FetchMany(p => p.Tags)
-                     .ToList();
+      var query = _session.Query<Post>()
+                          .Where(p => p.Published)
+                          .OrderByDescending(p => p.PostedOn)
+                          .Skip(pageNo * pageSize)
+                          .Take(pageSize)
+                          .Fetch(p => p.Category);
+
+      query.FetchMany(p => p.Tags).ToFuture();
+
+      return query.ToFuture().ToList();
     }
 
     public IList<Post> PostsForCategory(string categorySlug, int pageNo, int pageSize)
     {
-      return _session.Query<Post>()
-                     .Where(p => p.Published && p.Category.UrlSlug.Equals(categorySlug))
-                     .OrderByDescending(p => p.PostedOn)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category)
-                     .FetchMany(p => p.Tags)
-                     .ToList();
+      var query = _session.Query<Post>()
+                          .Where(p => p.Published && p.Category.UrlSlug.Equals(categorySlug))
+                          .OrderByDescending(p => p.PostedOn)
+                          .Skip(pageNo * pageSize)
+                          .Take(pageSize)
+                          .Fetch(p => p.Category);
+
+      query.FetchMany(p => p.Tags).ToFuture();
+
+      return query.ToFuture().ToList();
     }
 
     public IList<Post> PostsForTag(string tagSlug, int pageNo, int pageSize)
     {
-      return _session.Query<Post>()
-                     .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
-                     .OrderByDescending(p => p.PostedOn)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category)
-                     .FetchMany(p => p.Tags)
-                     .ToList();
+      var query = _session.Query<Post>()
+                         .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
+                         .OrderByDescending(p => p.PostedOn)
+                         .Skip(pageNo * pageSize)
+                         .Take(pageSize)
+                         .Fetch(p => p.Category);
+
+      query.FetchMany(p => p.Tags).ToFuture();
+
+      return query.ToFuture().ToList();
     }
 
     public IList<Post> PostsForSearch(string search, int pageNo, int pageSize)
     {
-      return _session.Query<Post>()
+      var query = _session.Query<Post>()
                      .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
                      .OrderByDescending(p => p.PostedOn)
                      .Skip(pageNo * pageSize)
                      .Take(pageSize)
-                     .Fetch(p => p.Category)
-                     .FetchMany(p => p.Tags)
-                     .ToList();
+                     .Fetch(p => p.Category);
+
+      query.FetchMany(p => p.Tags).ToFuture();
+
+      return query.ToFuture().ToList();
     }
 
     public int TotalPosts()
@@ -110,7 +118,7 @@ namespace JustBlog.Core
     {
       return _session.Query<Tag>().FirstOrDefault(t => t.UrlSlug.Equals(slug));
     }
-  
+
     public IList<Category> Categories()
     {
       return _session.Query<Category>().OrderBy(p => p.Name).ToList();
@@ -119,6 +127,6 @@ namespace JustBlog.Core
     public Category Category(string slug)
     {
       return _session.Query<Category>().FirstOrDefault(t => t.UrlSlug.Equals(slug));
-    } 
+    }
   }
 }
