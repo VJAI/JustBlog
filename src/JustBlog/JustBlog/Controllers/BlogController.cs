@@ -29,6 +29,9 @@ namespace JustBlog.Controllers
       if (post == null)
         throw new HttpException(404, "Post not found");
 
+      if (post.Published == false && User.Identity.IsAuthenticated == false)
+        throw new HttpException(401, "The post is not published");
+
       return View(post);
     }
 
