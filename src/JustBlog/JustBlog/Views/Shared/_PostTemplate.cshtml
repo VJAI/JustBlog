@@ -15,7 +15,7 @@
         <span>Tags:</span>@Helpers.Tags(Html, Model.Tags)
       </div>
       <div class="posted-date">
-        @Model.PostedOn.ToShortDateString()
+        @Model.PostedOn.ToConfigLocalTime()
       </div>
     </div>
   </div>
