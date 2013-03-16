@@ -1,0 +1,54 @@
+﻿@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Manage Posts, Categories and Tags</title>
+  <link href="@Url.Content("~/Scripts/jquery.jqGrid-4.4.2/css/ui.jqgrid.css")" rel="stylesheet" />
+  <link href="@Url.Content("~/Content/themes/simple/jquery-ui-1.9.2.custom/css/sunny/jquery-ui-1.9.2.custom.min.css")" rel="stylesheet" />
+  <link href="@Url.Content("~/Content/themes/simple/admin.css")" rel="stylesheet" />
+  <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+  <script src="@Url.Content("~/Scripts/jquery.jqGrid-4.4.2/js/jquery.jqGrid.min.js")"></script>
+  <script src="@Url.Content("~/Scripts/jquery.jqGrid-4.4.2/js/i18n/grid.locale-en.js")"></script>
+  <script src="@Url.Content("~/Scripts/tiny_mce/tiny_mce.js")"></script>
+  <script src="@Url.Content("~/Scripts/admin.js")"></script>
+  </head>
+<body>
+  <div style="text-align:right; margin-bottom:5px;">
+    @Html.ActionLink("logout", "Logout")
+  </div>
+
+  <h2>Manage Posts, Categories and Tags</h2>
+
+  <div id="tabs">
+    <ul>
+      <li><a href="#tab-posts">Posts</a></li>
+      <li><a href="#tab-cats">Categories</a></li>
+      <li><a href="#tab-tags">Tags</a></li>
+    </ul>
+    <div id="tab-posts" class="tab">
+      <table id="tablePosts" class="grid">
+      </table>
+      <div id="pagerPosts" class="pager">
+      </div>
+    </div>
+    <div id="tab-cats" class="tab">
+      <table id="tableCats" class="grid">
+      </table>
+      <div id="pagerCats" class="pager">
+      </div>
+    </div>
+    <div id="tab-tags" class="tab">
+      <table id="tableTags" class="grid">
+      </table>
+      <div id="pagerTags" class="pager">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

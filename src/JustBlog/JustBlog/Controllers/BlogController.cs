@@ -1,6 +1,10 @@
 ﻿using JustBlog.Core;
+using JustBlog.Core.Objects;
 using JustBlog.Models;
 using System;
+using System.Globalization;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -70,6 +74,47 @@ namespace JustBlog.Controllers
     {
       var widgetViewModel = new WidgetViewModel(_blogRepository);
       return PartialView("_Sidebars", widgetViewModel);
+    }
+
+    public ViewResult Contact()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Contact(Contact contact)
+    {
+      if (ModelState.IsValid)
+      {
+        using (var client = new SmtpClient())
+        {
+          var from = new MailAddress("admin@justblog.com", "JustBlog Messenger");
+          var to = new MailAddress("admin@justblog.com", "JustBlog Admin");
+
+          using (var message = new MailMessage(from, to))
+          {
+            message.Body = contact.Body;
+            message.IsBodyHtml = true;
+            message.BodyEncoding = Encoding.UTF8;
+
+            message.Subject = contact.Subject;
+            message.SubjectEncoding = Encoding.UTF8;
+
+            message.ReplyTo = new MailAddress(contact.Email);
+
+            client.Send(message);
+          }
+        }
+
+        return RedirectToAction("Posts");
+      }
+
+      return View();
+    }
+
+    public ViewResult Aboutme()
+    {
+      return View();
     }
   }
 }

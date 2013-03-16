@@ -1,6 +1,8 @@
 ﻿body 
 { font-family: "lucida sans", arial, sans-serif; 
-  font-size: 9pt; }
+  font-size: 9pt; 
+  background-color: #EEE7CD;
+}
 
 #login-div form
 { width: 500px; 
@@ -20,3 +22,7 @@ span.field-validation-error
 
 .validation-summary-errors
 { text-align: center; color: red; }
+
+div#tab-posts {
+  overflow: scroll;
+}

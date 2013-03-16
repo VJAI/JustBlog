@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustBlog", "src\JustBlog\JustBlog\JustBlog.csproj", "{A479EA19-8D37-4B08-9B16-29607676A95A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustBlog.Core", "src\JustBlog\JustBlog.Core\JustBlog.Core.csproj", "{787A6593-DB4C-4D2A-9AE7-9848BDC7D2FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustBlog.Tests", "test\JustBlog.Tests\JustBlog.Tests.csproj", "{DF08B68A-EC3F-4FC6-8A67-CEDF3FF06831}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A479EA19-8D37-4B08-9B16-29607676A95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A479EA19-8D37-4B08-9B16-29607676A95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A479EA19-8D37-4B08-9B16-29607676A95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A479EA19-8D37-4B08-9B16-29607676A95A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{787A6593-DB4C-4D2A-9AE7-9848BDC7D2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787A6593-DB4C-4D2A-9AE7-9848BDC7D2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787A6593-DB4C-4D2A-9AE7-9848BDC7D2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787A6593-DB4C-4D2A-9AE7-9848BDC7D2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF08B68A-EC3F-4FC6-8A67-CEDF3FF06831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF08B68A-EC3F-4FC6-8A67-CEDF3FF06831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF08B68A-EC3F-4FC6-8A67-CEDF3FF06831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF08B68A-EC3F-4FC6-8A67-CEDF3FF06831}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

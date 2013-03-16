@@ -1,4 +1,6 @@
 ﻿using JustBlog.Core;
+using JustBlog.Core.Objects;
+using JustBlog.Providers;
 using Ninject;
 using Ninject.Web.Common;
 using System.Web.Mvc;
@@ -14,6 +16,7 @@ namespace JustBlog
 
       kernel.Load(new RepositoryModule());
       kernel.Bind<IBlogRepository>().To<BlogRepository>();
+      kernel.Bind<IAuthProvider>().To<AuthProvider>();
 
       return kernel;
     }
@@ -22,6 +25,9 @@ namespace JustBlog
     {
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+      ModelBinders.Binders.Add(typeof(Post), new PostModelBinder(Kernel));
+
       base.OnApplicationStarted();
     }
   }

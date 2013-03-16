@@ -1,0 +1,48 @@
+﻿@model JustBlog.Models.LoginModel
+
+@{
+  Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Login</title>
+  <link href="@Url.Content("~/Content/themes/simple/admin.css")" rel="stylesheet" />
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+  <div id="login-div">
+    @Html.ValidationSummary(true)
+
+    @using (Html.BeginForm())
+    {
+      <fieldset>
+        <legend>Login</legend>
+        <p>
+          @Html.LabelFor(m => m.UserName)
+          @Html.TextBoxFor(m => m.UserName)
+          @Html.ValidationMessageFor(m => m.UserName)
+        </p>
+
+        <p>
+          @Html.LabelFor(m => m.Password)
+          @Html.PasswordFor(m => m.Password)
+          @Html.ValidationMessageFor(m => m.Password)
+        </p>
+
+        @Html.Hidden("ReturnUrl")
+        @Html.AntiForgeryToken()
+
+        <p>
+          <input type="submit" value="Login" />
+        </p>
+      </fieldset>
+    }
+  </div>
+</body>
+</html>
