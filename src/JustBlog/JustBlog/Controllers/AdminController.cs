@@ -81,7 +81,7 @@ namespace JustBlog.Controllers
       return Content(JsonConvert.SerializeObject(new
       {
         page = jqParams.page,
-        records = posts.Count,
+        records = totalPosts,
         rows = posts,
         total = Math.Ceiling(Convert.ToDouble(totalPosts) / jqParams.rows)
       }, new CustomDateTimeConverter()), "application/json");
@@ -155,8 +155,7 @@ namespace JustBlog.Controllers
 
       var json = JsonConvert.SerializeObject(new
       {
-        id = 0,
-        success = false,
+        success = true,
         message = "Post deleted successfully."
       });
 
@@ -170,7 +169,6 @@ namespace JustBlog.Controllers
     public ContentResult Categories()
     {
       var categories = _blogRepository.Categories();
-      var totalCategories = _blogRepository.TotalCategories();
 
       return Content(JsonConvert.SerializeObject(new
       {
@@ -244,8 +242,7 @@ namespace JustBlog.Controllers
 
       var json = JsonConvert.SerializeObject(new
       {
-        id = 0,
-        success = false,
+        success = true,
         message = "Category deleted successfully."
       });
 
@@ -275,7 +272,6 @@ namespace JustBlog.Controllers
     public ContentResult Tags()
     {
       var tags = _blogRepository.Tags();
-      var totalPosts = _blogRepository.TotalTags();
 
       return Content(JsonConvert.SerializeObject(new
       {
@@ -349,8 +345,7 @@ namespace JustBlog.Controllers
 
       var json = JsonConvert.SerializeObject(new
       {
-        id = 0,
-        success = false,
+        success = true,
         message = "Tag deleted successfully."
       });
 

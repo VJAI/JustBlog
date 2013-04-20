@@ -227,8 +227,12 @@ namespace JustBlog.Core
 
     public void DeletePost(int id)
     {
-      var post = _session.Get<Post>(id);
-      if (post != null) _session.Delete(post);
+      using (var tran = _session.BeginTransaction())
+      {
+        var post = _session.Get<Post>(id);
+        if (post != null) _session.Delete(post);
+        tran.Commit();
+      }
     }
 
     public IList<Tag> Tags()
