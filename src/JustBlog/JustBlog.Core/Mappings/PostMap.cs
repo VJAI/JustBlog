@@ -18,7 +18,7 @@ namespace JustBlog.Core.Mappings
       Map(x => x.PostedOn).Not.Nullable();
       Map(x => x.Modified);
       References(x => x.Category).Column("Category").Not.Nullable();
-      HasManyToMany(x => x.Tags).Cascade.All().Table("PostTagMap");
+      HasManyToMany(x => x.Tags).Table("PostTagMap");
     }
   }
 }
