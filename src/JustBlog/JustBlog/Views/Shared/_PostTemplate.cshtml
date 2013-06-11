@@ -6,6 +6,9 @@
       <div class="post-title">
         <h2>@Html.PostLink(Model)</h2>
       </div>
+      <div class="share-links">
+        @Html.Partial("_AddThis")
+      </div>
     </div>
     <div class="row">
       <div class="post-category">
@@ -13,6 +16,9 @@
       </div>
       <div class="post-tags">
         <span>Tags:</span>@Helpers.Tags(Html, Model.Tags)
+      </div>
+      <div class="no-of-comments">
+        <a href="@string.Format("{0}#disqus_thread", Model.Href(Url))"></a>
       </div>
       <div class="posted-date">
         @Model.PostedOn.ToConfigLocalTime()
@@ -26,3 +32,4 @@
     @Html.ActionLink("continue...", "post", "blog", new { year = Model.PostedOn.Year, month = Model.PostedOn.Month, day = Model.PostedOn.Day, title = Model.UrlSlug }, new { title = "continue..." })
   </div>
 </div>
+

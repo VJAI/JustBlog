@@ -2,6 +2,8 @@
 
 @{
   ViewBag.Title = Model.Title;
+  ViewBag.Keywords = string.Join(" ", Model.Tags.Select(t => t.Name).ToArray());
+  ViewBag.Description = Model.Meta;
 }
 
 <div id="content">
@@ -11,6 +13,9 @@
         <div class="post-title">
           <h1>@Html.PostLink(Model)</h1>
         </div>
+        <div class="share-links">
+          @Html.Partial("_AddThis")
+        </div>
       </div>
       <div class="row">
         <div class="post-category">
@@ -19,13 +24,17 @@
         <div class="post-tags">
           <span>Tags:</span>&nbsp;@Helpers.Tags(Html, Model.Tags)
         </div>
+        <div class="no-of-comments">
+          <a href="@string.Format("{0}#disqus_thread", Model.Href(Url))"></a>
+        </div>
         <div class="posted-date">
           @Model.PostedOn.ToConfigLocalTime()
         </div>
       </div>
     </div>
     <div class="post-body">
-     @Html.Raw(Model.Description)
+      @Html.Raw(Model.Description)
     </div>
+    @Html.Partial("_Disqus")
   </div>
 </div>

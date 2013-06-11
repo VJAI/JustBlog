@@ -4,6 +4,7 @@ using FluentNHibernate.Cfg.Db;
 using JustBlog.Core.Objects;
 using NHibernate;
 using NHibernate.Cache;
+using NHibernate.Tool.hbm2ddl;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Common;

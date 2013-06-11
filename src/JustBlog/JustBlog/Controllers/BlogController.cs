@@ -1,12 +1,14 @@
-﻿using JustBlog.Core;
-using JustBlog.Core.Objects;
-using JustBlog.Models;
-using System;
-using System.Globalization;
+﻿using System;
+using System.Configuration;
+using System.Linq;
 using System.Net.Mail;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using JustBlog.Core;
+using JustBlog.Core.Objects;
+using JustBlog.Models;
 
 namespace JustBlog.Controllers
 {
@@ -82,14 +84,15 @@ namespace JustBlog.Controllers
     }
 
     [HttpPost]
-    public ActionResult Contact(Contact contact)
+    public ViewResult Contact(Contact contact)
     {
       if (ModelState.IsValid)
       {
         using (var client = new SmtpClient())
         {
-          var from = new MailAddress("admin@justblog.com", "JustBlog Messenger");
-          var to = new MailAddress("admin@justblog.com", "JustBlog Admin");
+          var adminEmail = ConfigurationManager.AppSettings["AdminEmail"];
+          var from = new MailAddress(adminEmail, "JustBlog Messenger");
+          var to = new MailAddress(adminEmail, "JustBlog Admin");
 
           using (var message = new MailMessage(from, to))
           {
@@ -106,7 +109,7 @@ namespace JustBlog.Controllers
           }
         }
 
-        return RedirectToAction("Posts");
+        return View("Thanks");
       }
 
       return View();
@@ -116,5 +119,35 @@ namespace JustBlog.Controllers
     {
       return View();
     }
+
+    public ActionResult Feed()
+    {
+      var blogTitle = ConfigurationManager.AppSettings["BlogTitle"];
+      var blogDescription = ConfigurationManager.AppSettings["BlogDescription"];
+      var blogUrl = ConfigurationManager.AppSettings["BlogUrl"];
+
+      var posts = _blogRepository.Posts(0, 25).Select
+      (
+          p => new SyndicationItem
+              (
+                  p.Title,
+                  p.Description,
+                  new Uri(string.Concat(blogUrl, p.Href(Url)))
+              )
+      );
+
+      var feed = new SyndicationFeed(blogTitle, blogDescription, new Uri(blogUrl), posts)
+      {
+        Copyright = new TextSyndicationContent(String.Format("Copyright © {0}", blogTitle)),
+        Language = "en-US"
+      };
+
+      return new FeedResult(new Rss20FeedFormatter(feed));
+    }
+
+    //public ActionResult BadAction()
+    //{
+    //  throw new NotImplementedException();
+    //}
   }
 }
