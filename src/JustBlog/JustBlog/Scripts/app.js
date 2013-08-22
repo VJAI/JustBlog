@@ -2,7 +2,7 @@
 $(function () {
 
   $('#search-form').submit(function () {
-    if ($("#search").val().trim())
+    if ($("#s").val().trim())
       return true;
     return false;
   });
