@@ -1,10 +1,14 @@
-﻿
+﻿#region Usings
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+#endregion
 
 namespace JustBlog.Core.Objects
 {
+  /// <summary>
+  /// Represents a tag that is labelled on a post.
+  /// </summary>
   public class Tag
   {
     public virtual int Id

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
@@ -9,9 +10,13 @@ using System.Web.Mvc;
 using JustBlog.Core;
 using JustBlog.Core.Objects;
 using JustBlog.Models;
+#endregion
 
 namespace JustBlog.Controllers
 {
+  /// <summary>
+  /// Home controller that contain actions to return list/view pages and others.
+  /// </summary>
   public class BlogController: Controller
   {
     private readonly IBlogRepository _blogRepository;
@@ -21,6 +26,11 @@ namespace JustBlog.Controllers
       _blogRepository = blogRepository;
     }
 
+    /// <summary>
+    /// Return the list page with latest posts.
+    /// </summary>
+    /// <param name="p">pagination number</param>
+    /// <returns></returns>
     public ViewResult Posts(int p = 1)
     {
       var viewModel = new ListViewModel(_blogRepository, p);
@@ -28,6 +38,13 @@ namespace JustBlog.Controllers
       return View("List", viewModel);
     }
 
+    /// <summary>
+    /// Return a particular post based on the puslished year, month and url slug.
+    /// </summary>
+    /// <param name="year">Published year</param>
+    /// <param name="month">Published month</param>
+    /// <param name="title">Url slug</param>
+    /// <returns></returns>
     public ViewResult Post(int year, int month, string title)
     {
       var post = _blogRepository.Post(year, month, title);
@@ -41,6 +58,12 @@ namespace JustBlog.Controllers
       return View(post);
     }
 
+    /// <summary>
+    /// Return the posts belongs to a category.
+    /// </summary>
+    /// <param name="category">Url slug</param>
+    /// <param name="p">Pagination number</param>
+    /// <returns></returns>
     public ViewResult Category(string category, int p = 1)
     {
       var viewModel = new ListViewModel(_blogRepository, category, "Category", p);
@@ -52,6 +75,12 @@ namespace JustBlog.Controllers
       return View("List", viewModel);
     }
 
+    /// <summary>
+    /// Return the posts belongs to a tag.
+    /// </summary>
+    /// <param name="tag">Url slug</param>
+    /// <param name="p">Pagination number</param>
+    /// <returns></returns>
     public ViewResult Tag(string tag, int p = 1)
     {
       var viewModel = new ListViewModel(_blogRepository, tag, "Tag", p);
@@ -63,6 +92,12 @@ namespace JustBlog.Controllers
       return View("List", viewModel);
     }
 
+    /// <summary>
+    /// Return the posts that matches the search text.
+    /// </summary>
+    /// <param name="s">search text</param>
+    /// <param name="p">Pagination number</param>
+    /// <returns></returns>
     public ViewResult Search(string s, int p = 1)
     {
       ViewBag.Title = String.Format(@"Lists of posts found for search text ""{0}""", s);
@@ -71,6 +106,10 @@ namespace JustBlog.Controllers
       return View("List", viewModel);
     }
 
+    /// <summary>
+    /// Child action that returns the sidebar partial view.
+    /// </summary>
+    /// <returns></returns>
     [ChildActionOnly]
     public PartialViewResult Sidebars()
     {
@@ -78,11 +117,20 @@ namespace JustBlog.Controllers
       return PartialView("_Sidebars", widgetViewModel);
     }
 
+    /// <summary>
+    /// Return the contact form.
+    /// </summary>
+    /// <returns></returns>
     public ViewResult Contact()
     {
       return View();
     }
 
+    /// <summary>
+    /// Send an email to the blog admin from the POSTed contact form.
+    /// </summary>
+    /// <param name="contact"></param>
+    /// <returns></returns>
     [HttpPost]
     public ViewResult Contact(Contact contact)
     {
@@ -115,11 +163,19 @@ namespace JustBlog.Controllers
       return View();
     }
 
+    /// <summary>
+    /// Return the About me page.
+    /// </summary>
+    /// <returns></returns>
     public ViewResult Aboutme()
     {
       return View();
     }
 
+    /// <summary>
+    /// Generate and return RSS feed.
+    /// </summary>
+    /// <returns></returns>
     public ActionResult Feed()
     {
       var blogTitle = ConfigurationManager.AppSettings["BlogTitle"];
@@ -144,10 +200,5 @@ namespace JustBlog.Controllers
 
       return new FeedResult(new Rss20FeedFormatter(feed));
     }
-
-    //public ActionResult BadAction()
-    //{
-    //  throw new NotImplementedException();
-    //}
   }
 }

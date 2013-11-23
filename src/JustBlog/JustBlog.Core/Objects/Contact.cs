@@ -3,8 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JustBlog.Core.Objects
 {
+  /// <summary>
+  /// Encapsulates the information submitted by the contact form.
+  /// </summary>
   public class Contact
   {
+    /// <summary>
+    /// The user name.
+    /// </summary>
     [Required]
     public string Name { get; set; }
 

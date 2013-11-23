@@ -1,10 +1,15 @@
 ﻿
+#region Usings
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+#endregion
 
 namespace JustBlog.Core.Objects
 {
+  /// <summary>
+  /// Represents a category that contains group of blog posts.
+  /// </summary>
   public class Category
   {
     public virtual int Id

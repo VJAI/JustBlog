@@ -1,13 +1,17 @@
-﻿
+﻿#region Usings
 using JustBlog.Core;
 using JustBlog.Core.Objects;
 using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+#endregion
 
 namespace JustBlog
 {
+  /// <summary>
+  /// Bind POST model to actions.
+  /// </summary>
   public class PostModelBinder : DefaultModelBinder
   {
     private readonly IKernel _kernel;
@@ -21,10 +25,10 @@ namespace JustBlog
     {
       var post = (Post)base.BindModel(controllerContext, bindingContext);
 
-      var _blogRepository = _kernel.Get<IBlogRepository>();
+      var blogRepository = _kernel.Get<IBlogRepository>();
 
       if (post.Category != null)
-        post.Category = _blogRepository.Category(post.Category.Id);
+        post.Category = blogRepository.Category(post.Category.Id);
 
       var tags = bindingContext.ValueProvider.GetValue("Tags").AttemptedValue.Split(',');
 
@@ -34,12 +38,12 @@ namespace JustBlog
 
         foreach (var tag in tags)
         {
-          post.Tags.Add(_blogRepository.Tag(int.Parse(tag.Trim())));
+          post.Tags.Add(blogRepository.Tag(int.Parse(tag.Trim())));
         }
       }
 
       if (bindingContext.ValueProvider.GetValue("oper").AttemptedValue.Equals("edit"))
-        post.Modified = DateTime.UtcNow;
+        post.Modified = DateTime.UtcNow; // dates are stored in UTC timezone.
       else
         post.PostedOn = DateTime.UtcNow;
 

@@ -6,12 +6,17 @@ using System.Xml;
 
 namespace JustBlog
 {
+  /// <summary>
+  /// Custom action result that renders RSS feed.
+  /// </summary>
   public class FeedResult : ActionResult
   {
+    private readonly SyndicationFeedFormatter _feed;
+
     public Encoding ContentEncoding { get; set; }
+
     public string ContentType { get; set; }
 
-    private readonly SyndicationFeedFormatter _feed;
     public SyndicationFeedFormatter Feed
     {
       get { return _feed; }

@@ -1,4 +1,5 @@
-﻿using JustBlog.Core;
+﻿#region Usings
+using JustBlog.Core;
 using JustBlog.Core.Objects;
 using JustBlog.Models;
 using JustBlog.Providers;
@@ -7,9 +8,13 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+#endregion
 
 namespace JustBlog.Controllers
 {
+  /// <summary>
+  /// Contains actions required for admin.
+  /// </summary>
   [Authorize]
   public class AdminController : Controller
   {
@@ -22,9 +27,15 @@ namespace JustBlog.Controllers
       _blogRepository = blogRepository;
     }
 
+    /// <summary>
+    /// Return the login page.
+    /// </summary>
+    /// <param name="returnUrl"></param>
+    /// <returns></returns>
     [AllowAnonymous]
     public ActionResult Login(string returnUrl)
     {
+      // If already logged-in redirect the user to manage page.
       if (_authProvider.IsLoggedIn)
         return RedirectToUrl(returnUrl);
 
@@ -33,6 +44,12 @@ namespace JustBlog.Controllers
       return View();
     }
 
+    /// <summary>
+    /// Login POST action.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="returnUrl"></param>
+    /// <returns></returns>
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
@@ -47,11 +64,19 @@ namespace JustBlog.Controllers
       return View(model);
     }
 
+    /// <summary>
+    /// Return page to manage posts, categories and tags.
+    /// </summary>
+    /// <returns></returns>
     public ActionResult Manage()
     {
       return View();
     }
 
+    /// <summary>
+    /// Logout the user and return the login page.
+    /// </summary>
+    /// <returns></returns>
     public ActionResult Logout()
     {
       _authProvider.Logout();
@@ -73,6 +98,11 @@ namespace JustBlog.Controllers
 
     #region Posts
 
+    /// <summary>
+    /// Return the posts based on jqgrid input parameters as JSON.
+    /// </summary>
+    /// <param name="jqParams"></param>
+    /// <returns></returns>
     public ContentResult Posts(JqInViewModel jqParams)
     {
       var posts = _blogRepository.Posts(jqParams.page - 1, jqParams.rows, jqParams.sidx, jqParams.sord == "asc");
@@ -87,6 +117,11 @@ namespace JustBlog.Controllers
       }, new CustomDateTimeConverter()), "application/json");
     }
 
+    /// <summary>
+    /// Add a new post.
+    /// </summary>
+    /// <param name="post"></param>
+    /// <returns></returns>
     [HttpPost, ValidateInput(false)]
     public ContentResult AddPost(Post post)
     {
@@ -118,6 +153,11 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Edit an existing post.
+    /// </summary>
+    /// <param name="post"></param>
+    /// <returns></returns>
     [HttpPost, ValidateInput(false)]
     public ContentResult EditPost(Post post)
     {
@@ -148,6 +188,11 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Delete an existing post.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult DeletePost(int id)
     {
@@ -166,6 +211,10 @@ namespace JustBlog.Controllers
 
     #region Categories
 
+    /// <summary>
+    /// Return all the categories.
+    /// </summary>
+    /// <returns></returns>
     public ContentResult Categories()
     {
       var categories = _blogRepository.Categories();
@@ -179,6 +228,11 @@ namespace JustBlog.Controllers
       }), "application/json");
     }
 
+    /// <summary>
+    /// Add new category.
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult AddCategory([Bind(Exclude = "Id")]Category category)
     {
@@ -207,6 +261,11 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Edit an existing category.
+    /// </summary>
+    /// <param name="category"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult EditCategory(Category category)
     {
@@ -235,6 +294,11 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Delete an existing category.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult DeleteCategory(int id)
     {
@@ -249,6 +313,10 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Return html required to create category dropdown in jQGrid popup.
+    /// </summary>
+    /// <returns></returns>
     public ContentResult GetCategoriesHtml()
     {
       var categories = _blogRepository.Categories().OrderBy(s => s.Name);
@@ -269,6 +337,10 @@ namespace JustBlog.Controllers
 
     #region Tags
 
+    /// <summary>
+    /// Return all the tags as JSON.
+    /// </summary>
+    /// <returns></returns>
     public ContentResult Tags()
     {
       var tags = _blogRepository.Tags();
@@ -282,6 +354,11 @@ namespace JustBlog.Controllers
       }), "application/json");
     }
 
+    /// <summary>
+    /// Add a new tag.
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult AddTag([Bind(Exclude = "Id")]Tag tag)
     {
@@ -310,6 +387,11 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Edit an existing tag.
+    /// </summary>
+    /// <param name="tag"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult EditTag(Tag tag)
     {
@@ -338,6 +420,11 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Delete an existing tag.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpPost]
     public ContentResult DeleteTag(int id)
     {
@@ -352,11 +439,15 @@ namespace JustBlog.Controllers
       return Content(json, "application/json");
     }
 
+    /// <summary>
+    /// Return html required to create tag dropdown in jQGrid popup.
+    /// </summary>
+    /// <returns></returns>
     public ContentResult GetTagsHtml()
     {
       var tags = _blogRepository.Tags().OrderBy(s => s.Name);
 
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.AppendLine(@"<select multiple=""multiple"">");
 
       foreach (var tag in tags)
@@ -368,6 +459,11 @@ namespace JustBlog.Controllers
       return Content(sb.ToString(), "text/html");
     }
 
+    /// <summary>
+    /// Navigate to particular post.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public ActionResult GoToPost(int id)
     {
       var post = _blogRepository.Post(id);

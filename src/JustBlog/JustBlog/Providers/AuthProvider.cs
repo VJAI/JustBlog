@@ -6,6 +6,9 @@ namespace JustBlog.Providers
 {
   public class AuthProvider: IAuthProvider
   {
+    /// <summary>
+    /// Return True if the user is already logged-in.
+    /// </summary>
     public bool IsLoggedIn
     {
       get
@@ -14,9 +17,15 @@ namespace JustBlog.Providers
       }
     }
 
+    /// <summary>
+    /// Authenticate an user and set cookie if user is valid.
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
+    /// <returns></returns>
     public bool Login(string username, string password)
     {
-      bool result = FormsAuthentication.Authenticate(username, password);
+      var result = FormsAuthentication.Authenticate(username, password); // TODO: User Membership APIs
 
       if (result)
         FormsAuthentication.SetAuthCookie(username, false);
@@ -24,6 +33,9 @@ namespace JustBlog.Providers
       return result;
     }
 
+    /// <summary>
+    /// Logout the user.
+    /// </summary>
     public void Logout()
     {
       FormsAuthentication.SignOut();

@@ -1,6 +1,7 @@
 ﻿
 namespace JustBlog.Models
 {
+  // NOT USED!
   public class JqOutViewModel
   {
     public int rows { get; set; }

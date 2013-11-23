@@ -1,4 +1,5 @@
 ﻿
+#region Usings
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using JustBlog.Core.Objects;
@@ -8,9 +9,13 @@ using NHibernate.Tool.hbm2ddl;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Common;
+#endregion
 
 namespace JustBlog.Core
 {
+  /// <summary>
+  /// Contains the bindings for db components.
+  /// </summary>
   public class RepositoryModule: NinjectModule
   {
     public override void Load()
