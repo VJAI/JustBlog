@@ -1,0 +1,67 @@
+﻿@using System.Configuration
+
+@{
+  Layout = null;
+  var action = ((string)ViewContext.RouteData.Values["Action"]).ToLower();
+
+  var blogTitle = ConfigurationManager.AppSettings["BlogTitle"];
+  var feedBurnerUrl = ConfigurationManager.AppSettings["FeedBurnerUrl"];
+}
+
+<!DOCTYPE html>
+
+<html>
+  
+  <head>
+    
+    <meta name="viewport" content="width=device-width" />
+
+    <title>@ViewBag.Title</title>
+
+    <meta name="keywords" content="@(ViewBag.Keywords ?? ConfigurationManager.AppSettings["MetaKeywords"])" />
+    <meta name="description" content="@(ViewBag.Description ?? ConfigurationManager.AppSettings["MetaDescription"])"/>
+    <meta name="author" content="@ConfigurationManager.AppSettings["Author"]"/>
+
+    @Styles.Render("~/Content/themes/simple/css")
+    @Scripts.Render("~/jquery", "~/jqueryval", "~/jqueryunobtrusiveval", "~/js")
+  </head>
+  <body>
+    
+    <div id="main">
+      
+      <!-- Header & Navigation -->
+      <div id="header">
+        <div id="logo">
+          <div id="logo_text">
+            <h1><a href="/"><span class="logo_colour">@blogTitle</span></a></h1>
+            <h2>Writings, Experiments and More...</h2>
+          </div>
+        </div>
+        <div id="menubar">
+          <ul id="menu">
+            <li class="@(action == "posts" ? "selected" : "")">@Html.ActionLink("Posts", "Posts")</li>
+            <li class="@(action == "contact" ? "selected" : "")">@Html.ActionLink("Contact", "Contact")</li>
+            <li class="@(action == "aboutme" ? "selected" : "")">@Html.ActionLink("About Me", "Aboutme")</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div id="site_content">
+
+        <div class="feeddiv">
+          <a href="@feedBurnerUrl" title="Subscribe to my blog">Subscribe to my blog</a>
+        </div>
+
+        @Html.Partial("_Search")
+        @RenderBody()
+        @Html.Action("Sidebars")
+      </div>
+      
+      <!-- Footer -->
+      <div id="footer">
+        Copyright © @DateTime.Now.Year @blogTitle All Rights Reserved 
+      </div>
+    </div>
+  </body>
+</html>

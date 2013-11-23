@@ -1,0 +1,7 @@
+﻿@helper Tags(System.Web.Mvc.HtmlHelper htmlHelper, IList<JustBlog.Core.Objects.Tag> tags)
+{
+  foreach (var tag in tags)
+  {
+    <div class="tags-div">@JustBlog.ActionLinkExtensions.TagLink(htmlHelper, tag)</div>     
+  }
+}

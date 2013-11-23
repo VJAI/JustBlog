@@ -1,0 +1,20 @@
+﻿@model IList<JustBlog.Core.Objects.Category>
+
+<!-- Widget to display categories in sidebar -->
+<div class="sidebar">
+  <h3>Categories</h3>
+
+  @if (Model.Count > 0)
+  {
+    <ul>
+      @foreach (var category in Model)
+      {
+        <li>@Html.CategoryLink(category)</li>
+      }
+    </ul>
+  }
+  else
+  {
+    <p>No categories found!</p>
+  }
+</div>
