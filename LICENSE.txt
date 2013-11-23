@@ -1,12 +1,16 @@
 
-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
 Date: 11/23/2013
 Author: Vijaya Anand, www.prideparrot.com
 Copyright (C) 2013, All Rights Reserved.
 
+-------------------------------------------------------------------------------------------
+
 NOTICE:
-------------------------------------------------------------------------------------------------
+=======
 
 You can copy, modify and use the source code privately. You are not allowed to *SELL* the original 
-or modified version of the source to anybody.
+or modified version of the source code to anybody.
 
+-------------------------------------------------------------------------------------------
