@@ -7,6 +7,6 @@ A simple blog built using following technologies.
 4. Ninject
 5. jQuery
 
-To learn how I created this, visit http://prideparrot.com/blog/archive/2012/12/how_to_create_a_simple_blog_part1.
+TO LEARN HOW I CREATED THIS APPLICATION PLEASE VISIT http://prideparrot.com/blog/archive/2012/12/how_to_create_a_simple_blog_part1.
 
-To launch your own blog in air, visit http://prideparrot.com/downloads/justblog.
+TO LAUNCH YOUR OWN BLOG IN AIR PLEASE VISIT http://prideparrot.com/downloads/justblog.
