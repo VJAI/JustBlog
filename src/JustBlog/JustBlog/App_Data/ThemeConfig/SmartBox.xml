@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Theme Name="smartbox">
+  <Bundle Type="css" VirtualPath="~/Assets/themes/smartbox/stylesheets/css">
+    <Include Path="~/Assets/themes/smartbox/stylesheets/bootstrap.css" />
+    <Include Path="~/Assets/themes/smartbox/stylesheets/responsive.css" />
+    <Include Path="~/Assets/themes/smartbox/stylesheets/font-awesome-all.css" />
+    <Include Path="~/Assets/themes/smartbox/stylesheets/fancybox.css" />
+    <Include Path="~/Assets/themes/smartbox/stylesheets/theme.css" />
+    <Include Path="~/Assets/themes/smartbox/stylesheets/fonts.css" />
+  </Bundle>
+  <Bundle Type="js" VirtualPath="~/js">
+    <Include Path="~/Assets/themes/smartbox/javascripts/bootstrap.js" />
+    <Include Path="~/Assets/themes/smartbox/javascripts/jquery.flexslider-min.js" />
+    <Include Path="~/Assets/themes/smartbox/javascripts/jquery.tweet.js" />
+    <Include Path="~/Assets/themes/smartbox/javascripts/jquery.fancybox.pack.js" />
+    <Include Path="~/Assets/themes/smartbox/javascripts/jquery.fancybox-media.js" />
+    <Include Path="~/Assets/themes/smartbox/javascripts/script.js" />
+  </Bundle>
+</Theme>

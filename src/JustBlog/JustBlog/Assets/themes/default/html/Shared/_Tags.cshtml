@@ -1,0 +1,18 @@
+﻿@model IList<JustBlog.Core.Objects.Tag>
+
+<!-- Widget to display tags in sidebar -->
+<div class="tags sidebar">
+  <h3>Tags</h3>
+
+  @if (Model.Count > 0)
+  {
+    foreach (var tag in Model)
+    {
+      @Html.TagLink(tag)
+    }
+  }
+  else
+  {
+    <p>No tags found!</p>
+  }
+</div>

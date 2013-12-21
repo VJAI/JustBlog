@@ -1,0 +1,23 @@
+﻿@model IList<JustBlog.Core.Objects.Post>
+
+<div class="sidebar-widget widget_recent_entries">
+	<h3 class="sidebar-header">Recent posts</h3>
+
+	  @if (Model.Count > 0)
+	  {
+	    <ul>
+	      @foreach (var post in Model)
+	      {
+	      	<li>
+                <h4>
+                	@Html.PostLink(post)
+                </h4>
+	      	</li>
+	      }
+	    </ul>
+	  }
+	  else
+	  {
+	    <p>No posts found!</p>
+	  }
+</div>

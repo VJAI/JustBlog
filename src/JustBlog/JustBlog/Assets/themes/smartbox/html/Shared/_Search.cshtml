@@ -1,0 +1,12 @@
+﻿<div class="sidebar-widget widget_search">
+  @using (Html.BeginForm("Search", "Blog", FormMethod.Get, new { id = "search-form" }))
+  {
+    <div class="input-append row-fluid">
+      @Html.TextBox("s", null, new { @class="span12", placeholder="search"})
+      <i class="icon-search"></i>
+      <button class="btn hide" type="submit">
+        search
+      </button>
+    </div>
+  }
+</div>

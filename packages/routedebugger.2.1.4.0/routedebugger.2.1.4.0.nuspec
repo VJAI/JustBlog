@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>routedebugger</id>
+    <version>2.1.4.0</version>
+    <title>Route Debugger</title>
+    <authors>Phil Haack</authors>
+    <owners>Phil Haack</owners>
+    <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+    <projectUrl>http://haacked.com/archive/2008/03/13/url-routing-debugger.aspx</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Route Debugger is a little utility I wrote to help debug issues with route configurations. See http://haacked.com/archive/2008/03/13/url-routing-debugger.aspx</description>
+    <summary>Route Debugger is a little utility I wrote to help debug issues with route configurations. See http://haacked.com/archive/2008/03/13/url-routing-debugger.aspx</summary>
+    <releaseNotes>* 2.1.1 No longer appends route info to the end of requests for files on disk.
+        * 2.1.4 Adds a bit of padding to the debug output.</releaseNotes>
+  </metadata>
+</package>
