@@ -28,18 +28,11 @@ namespace JustBlog
 
     protected override void OnApplicationStarted()
     {
-      var theme = ConfigurationManager.AppSettings["Theme"];
-      theme = String.IsNullOrEmpty(theme) ? "default" : theme;
-
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
-      BundleConfig.RegisterBundles(BundleTable.Bundles, theme);
-
-      ViewEngines.Engines.Add(new ThemedRazorViewEngine(theme));
+      BundleConfig.RegisterBundles(BundleTable.Bundles);
 
       ModelBinders.Binders.Add(typeof(Post), new PostModelBinder(Kernel));
-
-      HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
       base.OnApplicationStarted();
     }

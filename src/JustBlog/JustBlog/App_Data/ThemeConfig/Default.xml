@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Theme Name="default">
-  <Bundle Type="css" VirtualPath="~/Assets/themes/default/css" Include="~/Assets/themes/default/style.css" />
-  <Bundle Type="js" VirtualPath="~/js" Include="~/Assets/app.js" />
-</Theme>
