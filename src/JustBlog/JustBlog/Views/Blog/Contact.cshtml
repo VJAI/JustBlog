@@ -1,0 +1,49 @@
+﻿@model JustBlog.Core.Objects.Contact
+
+@{
+  ViewBag.Title = "Contact Me";
+}
+
+<h1>Contact Me</h1>
+
+<div id="content">
+  @using (Html.BeginForm())
+  {
+    <div class="form_settings">
+      <p>
+        <span class="field">Name</span>
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+      </p>
+
+      <p>
+        <span class="field">Email</span>
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+      </p>
+
+      <p>
+        <span class="field">Website</span>
+        @Html.TextBoxFor(m => m.Website)
+        @Html.ValidationMessageFor(m => m.Website)
+      </p>
+
+      <p>
+        <span class="field">Subject</span>
+        @Html.TextBoxFor(m => m.Subject)
+        @Html.ValidationMessageFor(m => m.Subject)
+      </p>
+
+      <p>
+        <span class="field">Body</span>
+        @Html.TextAreaFor(m => m.Body, new { rows = 10 })
+        @Html.ValidationMessageFor(m => m.Body)
+      </p>
+
+      <p style="padding-top: 15px">
+        <span>&nbsp;</span>
+        <input class="submit" type="submit" name="contact_submitted" value="submit">
+      </p>
+    </div>
+  }
+</div>
