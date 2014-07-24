@@ -164,3 +164,4 @@ D:\Git\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Ninject.Web.Common.pdb
 D:\Git\JustBlog\src\JustBlog\JustBlog.Core\bin\Debug\Ninject.Web.Common.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog.Core\obj\Debug\JustBlog.Core.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog.Core\obj\Debug\JustBlog.Core.pdb
+D:\Git\JustBlog\src\JustBlog\JustBlog.Core\obj\Debug\JustBlog.Core.csprojResolveAssemblyReference.cache

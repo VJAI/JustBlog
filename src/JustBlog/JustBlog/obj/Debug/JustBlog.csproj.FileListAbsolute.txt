@@ -438,4 +438,3 @@ D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Iesi.Collections.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog\obj\Debug\JustBlog.csprojResolveAssemblyReference.cache
 D:\Git\JustBlog\src\JustBlog\JustBlog\obj\Debug\JustBlog.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\obj\Debug\JustBlog.pdb
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\JustBlog.dll.config

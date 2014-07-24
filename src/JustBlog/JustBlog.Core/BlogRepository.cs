@@ -33,16 +33,21 @@ namespace JustBlog.Core
     /// <returns></returns>
     public IList<Post> Posts(int pageNo, int pageSize)
     {
-      var query = _session.Query<Post>()
-                          .Where(p => p.Published)
-                          .OrderByDescending(p => p.PostedOn)
-                          .Skip(pageNo * pageSize)
-                          .Take(pageSize)
-                          .Fetch(p => p.Category);
+      var posts = _session.Query<Post>()
+                            .Where(p => p.Published)
+                            .OrderByDescending(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
 
-      query.FetchMany(p => p.Tags).ToFuture();
+      var postIds = posts.Select(p => p.Id).ToList();
 
-      return query.ToFuture().ToList();
+      return _session.Query<Post>()
+            .OrderByDescending(p => p.PostedOn)
+            .Where(p => postIds.Contains(p.Id))
+            .FetchMany(p => p.Tags)
+            .ToList();
     }
 
     /// <summary>
@@ -54,16 +59,21 @@ namespace JustBlog.Core
     /// <returns></returns>
     public IList<Post> PostsForTag(string tagSlug, int pageNo, int pageSize)
     {
-      var query = _session.Query<Post>()
-                         .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
-                         .OrderByDescending(p => p.PostedOn)
-                         .Skip(pageNo * pageSize)
-                         .Take(pageSize)
-                         .Fetch(p => p.Category);
+      var posts = _session.Query<Post>()
+                      .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
+                      .OrderByDescending(p => p.PostedOn)
+                      .Skip(pageNo * pageSize)
+                      .Take(pageSize)
+                      .Fetch(p => p.Category)
+                      .ToList();
 
-      query.FetchMany(p => p.Tags).ToFuture();
+      var postIds = posts.Select(p => p.Id).ToList();
 
-      return query.ToFuture().ToList();
+      return _session.Query<Post>()
+            .OrderByDescending(p => p.PostedOn)
+            .Where(p => postIds.Contains(p.Id))
+            .FetchMany(p => p.Tags)
+            .ToList();
     }
 
     /// <summary>
@@ -75,16 +85,21 @@ namespace JustBlog.Core
     /// <returns></returns>
     public IList<Post> PostsForCategory(string categorySlug, int pageNo, int pageSize)
     {
-      var query = _session.Query<Post>()
-                          .Where(p => p.Published && p.Category.UrlSlug.Equals(categorySlug))
-                          .OrderByDescending(p => p.PostedOn)
-                          .Skip(pageNo * pageSize)
-                          .Take(pageSize)
-                          .Fetch(p => p.Category);
+      var posts = _session.Query<Post>()
+                            .Where(p => p.Published && p.Category.UrlSlug.Equals(categorySlug))
+                            .OrderByDescending(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
 
-      query.FetchMany(p => p.Tags).ToFuture();
+      var postIds = posts.Select(p => p.Id).ToList();
 
-      return query.ToFuture().ToList();
+      return _session.Query<Post>()
+            .OrderByDescending(p => p.PostedOn)
+            .Where(p => postIds.Contains(p.Id))
+            .FetchMany(p => p.Tags)
+            .ToList();
     }
 
     /// <summary>
@@ -96,16 +111,21 @@ namespace JustBlog.Core
     /// <returns></returns>
     public IList<Post> PostsForSearch(string search, int pageNo, int pageSize)
     {
-      var query = _session.Query<Post>()
-                     .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
-                     .OrderByDescending(p => p.PostedOn)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+      var posts = _session.Query<Post>()
+                            .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
+                            .OrderByDescending(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
 
-      query.FetchMany(p => p.Tags).ToFuture();
+      var postIds = posts.Select(p => p.Id).ToList();
 
-      return query.ToFuture().ToList();
+      return _session.Query<Post>()
+            .OrderByDescending(p => p.PostedOn)
+            .Where(p => postIds.Contains(p.Id))
+            .FetchMany(p => p.Tags)
+            .ToList();
     }
 
     /// <summary>
@@ -164,92 +184,210 @@ namespace JustBlog.Core
     /// <returns></returns>
     public IList<Post> Posts(int pageNo, int pageSize, string sortColumn, bool sortByAscending)
     {
-      IQueryable<Post> query;
+      IList<Post> posts;
+      IList<int> postIds;
 
       switch (sortColumn)
       {
         case "Title":
-          if(sortByAscending)
-            query = _session.Query<Post>()
-                     .OrderBy(p => p.Title)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          if (sortByAscending)
+          {
+            posts = _session.Query<Post>()
+                            .OrderBy(p => p.Title)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList(); 
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderBy(p => p.Title)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           else
-            query = _session.Query<Post>()
-                     .OrderByDescending(p => p.Title)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Title)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderByDescending(p => p.Title)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           break;
         case "Published":
           if (sortByAscending)
-            query = _session.Query<Post>()
-                     .OrderBy(p => p.Published)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderBy(p => p.Published)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderBy(p => p.Published)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           else
-            query = _session.Query<Post>()
-                     .OrderByDescending(p => p.Published)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Published)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderByDescending(p => p.Published)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           break;
         case "PostedOn":
           if (sortByAscending)
-            query = _session.Query<Post>()
-                     .OrderBy(p => p.PostedOn)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderBy(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderBy(p => p.PostedOn)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           else
-            query = _session.Query<Post>()
-                     .OrderByDescending(p => p.PostedOn)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.PostedOn)
+                            .Where(p => postIds.Contains(p.Id))
+                            .FetchMany(p => p.Tags)
+                            .ToList();
+          }
           break;
         case "Modified":
           if (sortByAscending)
-            query = _session.Query<Post>()
-                     .OrderBy(p => p.Modified)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderBy(p => p.Modified)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderBy(p => p.Modified)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           else
-            query = _session.Query<Post>()
-                     .OrderByDescending(p => p.Modified)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Modified)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderByDescending(p => p.Modified)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           break;
         case "Category":
           if (sortByAscending)
-            query = _session.Query<Post>()
-                     .OrderBy(p => p.Category.Name)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderBy(p => p.Category.Name)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderBy(p => p.Category.Name)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           else
-            query = _session.Query<Post>()
-                     .OrderByDescending(p => p.Category.Name)
-                     .Skip(pageNo * pageSize)
-                     .Take(pageSize)
-                     .Fetch(p => p.Category);
+          {
+            posts = _session.Query<Post>()
+                            .OrderByDescending(p => p.Category.Name)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .Fetch(p => p.Category)
+                            .ToList();
+
+            postIds = posts.Select(p => p.Id).ToList();
+
+            posts = _session.Query<Post>()
+                             .OrderByDescending(p => p.Category.Name)
+                             .Where(p => postIds.Contains(p.Id))
+                             .FetchMany(p => p.Tags)
+                             .ToList();
+          }
           break;
         default:
-          query = _session.Query<Post>()
-                   .OrderByDescending(p => p.PostedOn)
-                   .Skip(pageNo * pageSize)
-                   .Take(pageSize)
-                   .Fetch(p => p.Category);
+          posts = _session.Query<Post>()
+                          .OrderByDescending(p => p.PostedOn)
+                          .Skip(pageNo * pageSize)
+                          .Take(pageSize)
+                          .Fetch(p => p.Category)
+                          .ToList();
+
+          postIds = posts.Select(p => p.Id).ToList();
+
+          posts = _session.Query<Post>()
+                           .OrderByDescending(p => p.PostedOn)
+                           .Where(p => postIds.Contains(p.Id))
+                           .FetchMany(p => p.Tags)
+                           .ToList();
           break;
       }
 
-      query.FetchMany(p => p.Tags).ToFuture();
-
-      return query.ToFuture().ToList();
+      return posts;
     }
 
     /// <summary>
