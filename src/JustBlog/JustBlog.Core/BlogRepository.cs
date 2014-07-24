@@ -43,9 +43,9 @@ namespace JustBlog.Core
 
       var postIds = posts.Select(p => p.Id).ToList();
 
-      return _session.Query<Post>()
-            .OrderByDescending(p => p.PostedOn)
+      return _session.Query<Post>()            
             .Where(p => postIds.Contains(p.Id))
+            .OrderByDescending(p => p.PostedOn)
             .FetchMany(p => p.Tags)
             .ToList();
     }
@@ -69,9 +69,9 @@ namespace JustBlog.Core
 
       var postIds = posts.Select(p => p.Id).ToList();
 
-      return _session.Query<Post>()
-            .OrderByDescending(p => p.PostedOn)
+      return _session.Query<Post>()            
             .Where(p => postIds.Contains(p.Id))
+            .OrderByDescending(p => p.PostedOn)
             .FetchMany(p => p.Tags)
             .ToList();
     }
@@ -96,8 +96,8 @@ namespace JustBlog.Core
       var postIds = posts.Select(p => p.Id).ToList();
 
       return _session.Query<Post>()
-            .OrderByDescending(p => p.PostedOn)
             .Where(p => postIds.Contains(p.Id))
+            .OrderByDescending(p => p.PostedOn)
             .FetchMany(p => p.Tags)
             .ToList();
     }
@@ -122,8 +122,8 @@ namespace JustBlog.Core
       var postIds = posts.Select(p => p.Id).ToList();
 
       return _session.Query<Post>()
-            .OrderByDescending(p => p.PostedOn)
             .Where(p => postIds.Contains(p.Id))
+            .OrderByDescending(p => p.PostedOn)
             .FetchMany(p => p.Tags)
             .ToList();
     }
@@ -201,9 +201,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderBy(p => p.Title)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderBy(p => p.Title)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -218,9 +218,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderByDescending(p => p.Title)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderByDescending(p => p.Title)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -237,9 +237,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderBy(p => p.Published)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderBy(p => p.Published)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -254,9 +254,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderByDescending(p => p.Published)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderByDescending(p => p.Published)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -273,9 +273,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderBy(p => p.PostedOn)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderBy(p => p.PostedOn)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -290,9 +290,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                            .OrderByDescending(p => p.PostedOn)
+            posts = _session.Query<Post>()                            
                             .Where(p => postIds.Contains(p.Id))
+                            .OrderByDescending(p => p.PostedOn)
                             .FetchMany(p => p.Tags)
                             .ToList();
           }
@@ -309,9 +309,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderBy(p => p.Modified)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderBy(p => p.Modified)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -326,9 +326,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderByDescending(p => p.Modified)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderByDescending(p => p.Modified)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -345,9 +345,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderBy(p => p.Category.Name)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderBy(p => p.Category.Name)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -362,9 +362,9 @@ namespace JustBlog.Core
 
             postIds = posts.Select(p => p.Id).ToList();
 
-            posts = _session.Query<Post>()
-                             .OrderByDescending(p => p.Category.Name)
+            posts = _session.Query<Post>()                             
                              .Where(p => postIds.Contains(p.Id))
+                             .OrderByDescending(p => p.Category.Name)
                              .FetchMany(p => p.Tags)
                              .ToList();
           }
@@ -379,9 +379,9 @@ namespace JustBlog.Core
 
           postIds = posts.Select(p => p.Id).ToList();
 
-          posts = _session.Query<Post>()
-                           .OrderByDescending(p => p.PostedOn)
+          posts = _session.Query<Post>()                           
                            .Where(p => postIds.Contains(p.Id))
+                           .OrderByDescending(p => p.PostedOn)
                            .FetchMany(p => p.Tags)
                            .ToList();
           break;
