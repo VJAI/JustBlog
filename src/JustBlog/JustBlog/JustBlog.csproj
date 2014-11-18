@@ -158,7 +158,6 @@
     <Compile Include="Providers\IAuthProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\photo.jpg" />

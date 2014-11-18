@@ -28,7 +28,6 @@ namespace JustBlog
 
     protected override void OnApplicationStarted()
     {
-      FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
 

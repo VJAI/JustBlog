@@ -400,10 +400,7 @@ D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.Web.Common.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.Web.Mvc.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\RouteDebugger.dll
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Net.Http.Formatting.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Helpers.dll
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Http.dll
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Http.WebHost.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Mvc.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Optimization.dll
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Razor.dll
@@ -423,10 +420,7 @@ D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.Web.Common.pdb
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.Web.Common.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.Web.Mvc.pdb
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\Ninject.Web.Mvc.xml
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Net.Http.Formatting.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Helpers.xml
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Http.xml
-D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Http.WebHost.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Mvc.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.Razor.xml
 D:\Git\JustBlog\src\JustBlog\JustBlog\bin\System.Web.WebPages.xml
