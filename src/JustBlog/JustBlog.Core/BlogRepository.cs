@@ -135,7 +135,7 @@ namespace JustBlog.Core
     /// <returns></returns>
     public int TotalPosts(bool checkIsPublished = true)
     {
-      return _session.Query<Post>().Where(p => checkIsPublished || p.Published == true).Count();
+      return _session.Query<Post>().Where(p => !checkIsPublished || p.Published == true).Count();
     }
 
     /// <summary>
